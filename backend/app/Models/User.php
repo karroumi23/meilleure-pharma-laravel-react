@@ -5,13 +5,15 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -45,5 +47,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Orders placed by the user.
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Prescriptions uploaded by the user.
+     */
+    public function prescriptions(): HasMany
+    {
+        return $this->hasMany(Prescription::class);
+    }
+
+    /**
+     * Reviews written by the user.
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 }

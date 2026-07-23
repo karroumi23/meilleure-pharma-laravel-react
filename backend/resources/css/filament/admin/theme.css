@@ -1,0 +1,23 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+:root{
+
+    --primary:#169DB3;
+
+    --primary-hover:#117F92;
+
+    --background:#F5F9FC;
+
+    --card:#FFFFFF;
+
+    --text:#1F2937;
+
+    --success:#16A34A;
+
+    --warning:#F59E0B;
+
+    --danger:#DC2626;
+
+}
