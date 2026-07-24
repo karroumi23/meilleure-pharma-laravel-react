@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('medicines', function (Blueprint $table) {
@@ -27,7 +24,9 @@ return new class extends Migration
 
             $table->string('slug')->unique();
 
-            $table->string('barcode')->nullable()->unique();
+            $table->string('sku')->unique()->nullable();
+
+            $table->string('barcode')->unique()->nullable();
 
             $table->string('dosage')->nullable();
 
@@ -35,30 +34,35 @@ return new class extends Migration
 
             $table->text('description')->nullable();
 
-            $table->decimal('price',10,2);
+            $table->decimal('price', 10, 2);
 
-            $table->decimal('sale_price',10,2)->nullable();
+            $table->decimal('sale_price', 10, 2)->nullable();
+
+            // NEW
+            $table->integer('stock')->default(0);
+
+            // NEW
+            $table->integer('minimum_stock')->default(5);
+
+            // NEW
+            $table->date('expiry_date')->nullable();
 
             $table->boolean('requires_prescription')->default(false);
 
-            $table->enum('status',[
+            // NEW
+            $table->boolean('featured')->default(false);
+
+            $table->enum('status', [
                 'active',
-                'inactive'
+                'inactive',
             ])->default('active');
-            
-            // SKU → Internal product code (very common in inventory systems).
-            $table->string('sku')->unique()->nullable();
-            // Rating → Average customer rating (used on the website without recalculating every page load).
+
             $table->float('rating')->default(0);
 
             $table->timestamps();
-
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('medicines');

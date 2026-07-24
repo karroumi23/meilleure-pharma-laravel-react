@@ -18,7 +18,7 @@ class Category extends Model
         'is_active',
     ];
 
-    public function medicines(): HasMany
+    public function medicines()
     {
         return $this->hasMany(Medicine::class);
     }

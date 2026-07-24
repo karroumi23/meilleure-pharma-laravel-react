@@ -18,8 +18,8 @@ class Brand extends Model
         'is_active',
     ];
 
-    public function medicines(): HasMany
-    {
-        return $this->hasMany(Medicine::class);
-    }
+    public function medicines()
+{
+    return $this->hasMany(Medicine::class);
+}
 }
