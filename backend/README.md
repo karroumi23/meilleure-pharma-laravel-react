@@ -1,4 +1,10 @@
-<!-- Filament admin (back-office)login :
+<!-- 
+ 1 cd bckend 
+ 2 php artisan serve  
+ 3 (http://127.0.0.1:8000)
+ -->
+
+<!-- Filament admin (back-office)login  :
 .     'name' => 'admin',
 .     'email' => 'wondersky500@gmail.com',
 .     'password' => Hash::make('12345678'), 

@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('stocks', function (Blueprint $table) {
@@ -19,20 +16,27 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->integer('quantity')->default(0);
+            $table->enum('type', [
+                'entry',
+                'exit',
+                'adjustment'
+            ]);
 
-            $table->integer('minimum_quantity')->default(10);
+            $table->integer('quantity');
 
-            $table->string('location')->nullable();
+            $table->string('reference')->nullable();
+
+            $table->text('note')->nullable();
+
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
 
             $table->timestamps();
-
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('stocks');

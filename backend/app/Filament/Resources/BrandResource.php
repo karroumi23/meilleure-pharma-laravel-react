@@ -13,8 +13,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-use Illuminate\Support\Str;
-use Filament\Forms\Set;
+// use Illuminate\Support\Str;
+// use Filament\Forms\Set;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -49,11 +49,11 @@ class BrandResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Nom')
                     ->required()
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                    // ->live(onBlur: true)
+                    // ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
                     ->maxLength(255),
 
-                Forms\Components\Hidden::make('slug'),
+                // Forms\Components\Hidden::make('slug'),
 
                 Forms\Components\Textarea::make('description')
                     ->label('Description')

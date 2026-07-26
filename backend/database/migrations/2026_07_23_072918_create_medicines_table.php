@@ -22,10 +22,6 @@ return new class extends Migration
 
             $table->string('name');
 
-            $table->string('slug')->unique();
-
-            $table->string('sku')->unique()->nullable();
-
             $table->string('barcode')->unique()->nullable();
 
             $table->string('dosage')->nullable();
@@ -52,10 +48,7 @@ return new class extends Migration
             // NEW
             $table->boolean('featured')->default(false);
 
-            $table->enum('status', [
-                'active',
-                'inactive',
-            ])->default('active');
+            $table->boolean('is_active')->default(true);
 
             $table->float('rating')->default(0);
 

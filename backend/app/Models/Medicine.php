@@ -10,27 +10,44 @@ class Medicine extends Model
     use HasFactory;
 
     protected $fillable = [
+
         'category_id',
         'brand_id',
+
         'name',
-        'slug',
+        // 'slug',
+
+        // 'sku',
         'barcode',
         'dosage',
+
         'image',
         'description',
+
         'price',
         'sale_price',
+
+        'stock',
+        'minimum_stock',
+        'expiry_date',
+
         'requires_prescription',
+        'featured',
+
         'status',
-        'sku',
         'rating',
+
+        'is_active',
     ];
 
     protected $casts = [
-        'requires_prescription' => 'boolean',
-        'price' => 'decimal:2',
-        'sale_price' => 'decimal:2',
-        'rating' => 'float',
+
+        'requires_prescription'=>'boolean',
+        'featured'=>'boolean',
+        'is_active'=>'boolean',
+
+        'expiry_date'=>'date',
+
     ];
 
     public function category()
