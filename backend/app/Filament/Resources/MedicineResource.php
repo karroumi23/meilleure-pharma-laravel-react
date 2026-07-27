@@ -140,32 +140,29 @@ class MedicineResource extends Resource
             ->columns([
 
                 Tables\Columns\ImageColumn::make('image')
-                    ->label('Image')
+                    ->label('')
                     ->disk('public')
                     ->circular()
-                    ->height(50)
-                    ->width(50),
+                    ->size(50),
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('Médicament')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->weight('bold'),
 
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Catégorie')
                     ->badge()
-                    ->color('info')
-                    ->sortable(),
+                    ->color('info'),
 
                 Tables\Columns\TextColumn::make('brand.name')
                     ->label('Marque')
-                    ->badge()
-                    ->color('gray')
-                    ->sortable(),
+                    ->badge(),
 
                 Tables\Columns\TextColumn::make('price')
                     ->label('Prix')
-                    ->money('MAD')
+                    ->suffix(' DH')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('stock')
@@ -177,12 +174,12 @@ class MedicineResource extends Resource
                         default => 'success',
                     }),
 
-                Tables\Columns\IconColumn::make('requires_prescription')
-                    ->label('Ordonnance')
-                    ->boolean(),
-
                 Tables\Columns\IconColumn::make('featured')
                     ->label('Vedette')
+                    ->boolean(),
+
+                Tables\Columns\IconColumn::make('requires_prescription')
+                    ->label('Ordonnance')
                     ->boolean(),
 
                 Tables\Columns\IconColumn::make('is_active')
@@ -193,20 +190,33 @@ class MedicineResource extends Resource
 
             ->filters([
 
-                Tables\Filters\TernaryFilter::make('is_active')
-                    ->label('Actif'),
-
                 Tables\Filters\SelectFilter::make('category')
-                    ->relationship('category', 'name'),
+                    ->relationship('category', 'name')
+                    ->label('Catégorie'),
 
                 Tables\Filters\SelectFilter::make('brand')
-                    ->relationship('brand', 'name'),
+                    ->relationship('brand', 'name')
+                    ->label('Marque'),
+
+                Tables\Filters\TernaryFilter::make('featured')
+                    ->label('Vedette'),
+
+                Tables\Filters\TernaryFilter::make('requires_prescription')
+                    ->label('Ordonnance'),
+
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label('Actif'),
 
             ])
 
             ->actions([
+
+                Tables\Actions\ViewAction::make(),
+
                 Tables\Actions\EditAction::make(),
+
                 Tables\Actions\DeleteAction::make(),
+
             ])
 
             ->bulkActions([
