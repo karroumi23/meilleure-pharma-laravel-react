@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
@@ -21,48 +18,47 @@ return new class extends Migration
 
             $table->string('order_number')->unique();
 
-            $table->decimal('total', 10, 2);
+            $table->decimal('subtotal',10,2)->default(0);
 
-            $table->enum('status', [
+            $table->decimal('shipping_cost',10,2)->default(0);
+
+            $table->decimal('discount',10,2)->default(0);
+
+            $table->decimal('total',10,2);
+
+            $table->enum('status',[
                 'pending',
                 'confirmed',
-                'processing',
+                'preparing',
                 'shipped',
                 'delivered',
                 'cancelled'
             ])->default('pending');
 
-            $table->enum('payment_method', [
-                'cash_on_delivery',
-                'card',
-                'paypal'
-            ])->default('cash_on_delivery');
-
-            $table->enum('payment_status', [
-                'pending',
+            $table->enum('payment_status',[
+                'unpaid',
                 'paid',
-                'failed'
-            ])->default('pending');
+                'refunded'
+            ])->default('unpaid');
+
+            $table->string('payment_method')->nullable();
 
             $table->string('phone');
 
+            $table->string('city');
+
             $table->text('address');
 
-            $table->text('notes')->nullable();
+            $table->text('note')->nullable();
 
-            // Show the exact purchase date on the invoice.
             $table->timestamp('ordered_at')->nullable();
-            // Measure delivery time in reports and analytics.
-            $table->timestamp('delivered_at')->nullable();
-            
-            $table->timestamps();
 
+            $table->timestamp('delivered_at')->nullable();
+
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('orders');

@@ -1,0 +1,47 @@
+@import "../../css/app.css";
+
+@source "../../../app/Filament/**/*";
+@source "../../../resources/views/filament/**/*";
+@source "../../../vendor/filament/**/*.blade.php";
+
+/* ==========================
+   COLORS
+========================== */
+
+:root{
+
+    --primary:#169DB3;
+
+    --background:#F5F9FC;
+
+}
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+.fi-sidebar{
+
+    background:#169DB3;
+
+}
+
+/* ==========================
+   PAGE
+========================== */
+
+.fi-body{
+
+    background:#F5F9FC;
+
+}
+
+/* ==========================
+   CARDS
+========================== */
+
+.fi-section{
+
+    border-radius:16px;
+
+}

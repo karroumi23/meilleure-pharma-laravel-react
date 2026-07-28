@@ -15,7 +15,7 @@ class StockResource extends Resource
 {
     protected static ?string $model = Stock::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-archive-box';
+    protected static ?string $navigationIcon='heroicon-o-cube';
 
     protected static ?string $navigationLabel = 'Stock';
 
@@ -23,7 +23,7 @@ class StockResource extends Resource
 
     protected static ?string $modelLabel = 'Mouvement';
 
-    protected static ?string $navigationGroup = 'Stock';
+    protected static ?string $navigationGroup='Gestion du Stock';
 
     protected static ?int $navigationSort = 1;
 

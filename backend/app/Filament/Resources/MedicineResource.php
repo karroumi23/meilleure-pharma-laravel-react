@@ -24,7 +24,7 @@ class MedicineResource extends Resource
 {
     protected static ?string $model = Medicine::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-beaker';
+    protected static ?string $navigationIcon='heroicon-o-beaker';
 
     protected static ?string $navigationLabel = 'Médicaments';
 
@@ -32,7 +32,7 @@ class MedicineResource extends Resource
 
     protected static ?string $modelLabel = 'Médicament';
 
-    protected static ?string $navigationGroup = 'Catalogue';
+    protected static ?string $navigationGroup='Catalogue';
 
     protected static ?int $navigationSort = 3;
 

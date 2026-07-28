@@ -1,45 +1,31 @@
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-6">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
     @include('filament.components.stat-card',[
         'title'=>'Médicaments',
-        'value'=>$stats['medicines'],
-        'icon'=>'💊'
+        'value'=>\App\Models\Medicine::count(),
+        'icon'=>'💊',
+        'color'=>'#169DB3'
+    ])
+
+    @include('filament.components.stat-card',[
+        'title'=>'Stock',
+        'value'=>\App\Models\Medicine::sum('stock'),
+        'icon'=>'📦',
+        'color'=>'#16A34A'
     ])
 
     @include('filament.components.stat-card',[
         'title'=>'Catégories',
-        'value'=>$stats['categories'],
-        'icon'=>'📂'
+        'value'=>\App\Models\Category::count(),
+        'icon'=>'📂',
+        'color'=>'#F59E0B'
     ])
 
     @include('filament.components.stat-card',[
         'title'=>'Marques',
-        'value'=>$stats['brands'],
-        'icon'=>'🏭'
-    ])
-
-    @include('filament.components.stat-card',[
-        'title'=>'Commandes',
-        'value'=>$stats['orders'],
-        'icon'=>'🛒'
-    ])
-
-    @include('filament.components.stat-card',[
-        'title'=>'Stock faible',
-        'value'=>$stats['low_stock'],
-        'icon'=>'⚠️'
-    ])
-
-    @include('filament.components.stat-card',[
-        'title'=>'Sous ordonnance',
-        'value'=>$stats['prescription'],
-        'icon'=>'📄'
-    ])
-
-    @include('filament.components.stat-card',[
-        'title'=>'Produits vedettes',
-        'value'=>$stats['featured'],
-        'icon'=>'⭐'
+        'value'=>\App\Models\Brand::count(),
+        'icon'=>'🏷',
+        'color'=>'#DC2626'
     ])
 
 </div>

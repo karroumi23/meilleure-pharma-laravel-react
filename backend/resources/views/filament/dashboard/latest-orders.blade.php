@@ -1,5 +1,15 @@
-<div class="rounded-3xl bg-white p-8 shadow-sm mb-6">
+<div class="bg-white rounded-2xl shadow-sm p-6">
 
-    📋 Latest Orders (Coming Soon)
+    <h2 class="text-xl font-bold mb-4">
+
+        🛒 Dernières commandes
+
+    </h2>
+
+    <p class="text-gray-500">
+
+        Les commandes apparaîtront ici.
+
+    </p>
 
 </div>
