@@ -33,7 +33,7 @@ class CategoryResource extends Resource
 
     protected static ?string $modelLabel = 'Catégorie';
 
-    protected static ?string $navigationGroup = 'Catalogue';
+    protected static ?string $navigationGroup = '📦 Catalogue';
 
     protected static ?int $navigationSort = 1;
 

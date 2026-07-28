@@ -32,7 +32,7 @@ class MedicineResource extends Resource
 
     protected static ?string $modelLabel = 'Médicament';
 
-    protected static ?string $navigationGroup='Catalogue';
+    protected static ?string $navigationGroup = '📦 Catalogue';
 
     protected static ?int $navigationSort = 3;
 

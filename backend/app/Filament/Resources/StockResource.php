@@ -17,13 +17,13 @@ class StockResource extends Resource
 
     protected static ?string $navigationIcon='heroicon-o-cube';
 
-    protected static ?string $navigationLabel = 'Stock';
+    protected static ?string $navigationLabel = 'Mouvements de stock';
 
-    protected static ?string $pluralModelLabel = 'Stock';
+    protected static ?string $pluralModelLabel = 'Mouvements de stock';
 
-    protected static ?string $modelLabel = 'Mouvement';
+    protected static ?string $modelLabel = 'Mouvement de stock';
 
-    protected static ?string $navigationGroup='Gestion du Stock';
+    protected static ?string $navigationGroup = '📦 Stock';
 
     protected static ?int $navigationSort = 1;
 
