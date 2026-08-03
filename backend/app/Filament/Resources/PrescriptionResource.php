@@ -7,7 +7,6 @@ use App\Filament\Resources\PrescriptionResource\RelationManagers;
 use App\Models\Prescription;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
