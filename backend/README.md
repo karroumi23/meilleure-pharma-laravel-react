@@ -5,7 +5,7 @@
  -->
 
 <!-- Filament admin (back-office)login  :
-.     'name' => 'admin',
+.     'name' => 'karroumi',
 .     'email' => 'wondersky500@gmail.com',
 .     'password' => Hash::make('12345678'), 
  -->

@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Filament\Resources\BaseResource;
 
 
 use Filament\Forms\Components\Section;
@@ -20,7 +21,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Toggle;
 
-class MedicineResource extends Resource
+class MedicineResource extends BaseResource
 {
     protected static ?string $model = Medicine::class;
 
@@ -35,6 +36,11 @@ class MedicineResource extends Resource
     protected static ?string $navigationGroup = '📦 Catalogue';
 
     protected static ?int $navigationSort = 3;
+
+    protected static array $allowedRoles = [
+        'Administrator',
+        'Pharmacist',
+    ];
 
     // ---------form
     public static function form(Form $form): Form

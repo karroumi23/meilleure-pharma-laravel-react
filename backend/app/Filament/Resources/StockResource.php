@@ -10,8 +10,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Filament\Resources\BaseResource;
 
-class StockResource extends Resource
+class StockResource extends BaseResource
 {
     protected static ?string $model = Stock::class;
 
@@ -26,6 +27,11 @@ class StockResource extends Resource
     protected static ?string $navigationGroup = '📦 Stock';
 
     protected static ?int $navigationSort = 1;
+
+    protected static array $allowedRoles = [
+        'Administrator',
+        'Pharmacist',
+    ];
 
     public static function form(Form $form): Form
     {

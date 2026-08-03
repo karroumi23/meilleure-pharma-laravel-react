@@ -11,8 +11,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Filament\Resources\BaseResource;
 
-class OrderResource extends Resource
+class OrderResource extends BaseResource
 {
     protected static ?string $model = Order::class;
 
@@ -27,6 +28,11 @@ class OrderResource extends Resource
     protected static ?string $navigationGroup = '🛒 Commandes';
 
     protected static ?int $navigationSort = 1;
+
+    protected static array $allowedRoles = [
+        'Administrator',
+        'Pharmacist',
+    ];
 
     public static function form(Form $form): Form
     {

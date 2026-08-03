@@ -13,8 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Filament\Resources\BaseResource;
 
-class PrescriptionResource extends Resource
+
+class PrescriptionResource extends BaseResource
 {
     protected static ?string $model = Prescription::class;
 
@@ -29,6 +32,11 @@ protected static ?string $pluralModelLabel = 'Ordonnances';
 protected static ?string $modelLabel = 'Ordonnance';
 
 protected static ?int $navigationSort = 1;
+
+protected static array $allowedRoles = [
+    'Administrator',
+    'Pharmacist',
+];
 
     public static function form(Form $form): Form
     {
@@ -168,7 +176,7 @@ protected static ?int $navigationSort = 1;
 
                             'status' => 'approved',
 
-                            'validated_by' => auth()->id(),
+                            'validated_by' => Auth::id(),
 
                             'validated_at' => now(),
 
@@ -196,7 +204,7 @@ protected static ?int $navigationSort = 1;
 
                             'pharmacist_comment' => $data['comment'],
 
-                            'validated_by' => auth()->id(),
+                            'validated_by' => Auth::id(),
 
                             'validated_at' => now(),
 

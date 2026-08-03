@@ -22,8 +22,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\BaseResource;
 
-class CategoryResource extends Resource
+class CategoryResource extends BaseResource
 {
     protected static ?string $model = Category::class;
 
@@ -38,6 +39,10 @@ class CategoryResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
+
+    protected static array $allowedRoles = [
+        'Administrator',
+    ];
 
     public static function form(Form $form): Form
     {

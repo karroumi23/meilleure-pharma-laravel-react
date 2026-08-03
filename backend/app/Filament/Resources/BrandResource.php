@@ -7,7 +7,7 @@ use App\Filament\Resources\BrandResource\RelationManagers;
 use App\Models\Brand;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+//use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,8 +24,9 @@ use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use App\Filament\Resources\BaseResource;
 
-class BrandResource extends Resource
+class BrandResource extends BaseResource
 {
     protected static ?string $model = Brand::class;
 
@@ -40,6 +41,10 @@ class BrandResource extends Resource
     protected static ?string $navigationGroup = '📦 Catalogue';
 
     protected static ?int $navigationSort = 2;
+
+    protected static array $allowedRoles = [
+        'Administrator',
+    ];
 
     public static function form(Form $form): Form
     {
