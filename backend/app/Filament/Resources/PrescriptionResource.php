@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
 
 class PrescriptionResource extends Resource
 {
@@ -43,13 +44,17 @@ protected static ?int $navigationSort = 1;
 
                 Forms\Components\TextInput::make('reference')
                     ->label('Référence')
-                    ->required()
-                    ->maxLength(255),
+                    ->disabled()
+                    ->dehydrated()
+                    ->required(),
 
                 Forms\Components\FileUpload::make('file')
                     ->label('Ordonnance')
                     ->disk('public')
                     ->directory('prescriptions')
+                    ->downloadable()
+                    ->openable()
+                    ->previewable()
                     ->acceptedFileTypes([
                         'application/pdf',
                         'image/jpeg',
@@ -73,9 +78,8 @@ protected static ?int $navigationSort = 1;
                     ->rows(4),
 
                 Forms\Components\Select::make('validated_by')
-                    ->label('Validée par')
-                    ->relationship('validator', 'name')
-                    ->searchable(),
+                    ->disabled()
+                    ->dehydrated(),
 
                 Forms\Components\DateTimePicker::make('validated_at')
                     ->label('Date de validation'),
@@ -92,6 +96,11 @@ protected static ?int $navigationSort = 1;
                     ->label('Référence')
                     ->searchable(),
 
+                Tables\Columns\ImageColumn::make('file')
+                    ->label('Fichier')
+                    ->disk('public')
+                    ->square(),
+
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Client')
                     ->searchable(),
@@ -99,11 +108,16 @@ protected static ?int $navigationSort = 1;
                 Tables\Columns\TextColumn::make('status')
                     ->label('Statut')
                     ->badge()
-                    ->colors([
-                        'warning' => 'pending',
-                        'success' => 'approved',
-                        'danger' => 'rejected',
-                    ]),
+                    ->formatStateUsing(fn (string $state) => match ($state) {
+                        'pending' => 'En attente',
+                        'approved' => 'Approuvée',
+                        'rejected' => 'Refusée',
+                    })
+                    ->color(fn (string $state) => match ($state) {
+                        'pending' => 'warning',
+                        'approved' => 'success',
+                        'rejected' => 'danger',
+                    }),
 
                 Tables\Columns\TextColumn::make('validator.name')
                     ->label('Pharmacien'),
@@ -126,10 +140,69 @@ protected static ?int $navigationSort = 1;
                         'rejected' => 'Refusée',
                     ]),
 
+                Tables\Filters\Filter::make('validated')
+                    ->label('Validées')
+                    ->query(fn ($query) => $query->whereNotNull('validated_at')),
+
             ])
             ->actions([
 
                 Tables\Actions\ViewAction::make(),
+
+                Tables\Actions\Action::make('download')
+                    ->label('Télécharger')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('info')
+                    ->url(fn ($record) => Storage::disk('public')->url($record->file))
+                    ->openUrlInNewTab(),
+
+                Tables\Actions\Action::make('approve')
+                    ->label('Approuver')
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success')
+                    ->visible(fn ($record) => $record->status === 'pending')
+                    ->requiresConfirmation()
+                    ->action(function ($record) {
+
+                        $record->update([
+
+                            'status' => 'approved',
+
+                            'validated_by' => auth()->id(),
+
+                            'validated_at' => now(),
+
+                        ]);
+
+                    }),
+
+                Tables\Actions\Action::make('reject')
+                    ->label('Refuser')
+                    ->icon('heroicon-o-x-circle')
+                    ->color('danger')
+                    ->visible(fn ($record) => $record->status === 'pending')
+                    ->form([
+
+                        Forms\Components\Textarea::make('comment')
+                            ->label('Commentaire')
+                            ->required(),
+
+                    ])
+                    ->action(function ($record, array $data) {
+
+                        $record->update([
+
+                            'status' => 'rejected',
+
+                            'pharmacist_comment' => $data['comment'],
+
+                            'validated_by' => auth()->id(),
+
+                            'validated_at' => now(),
+
+                        ]);
+
+                    }),
 
                 Tables\Actions\EditAction::make(),
 
