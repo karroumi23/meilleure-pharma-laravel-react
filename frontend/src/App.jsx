@@ -1,52 +1,93 @@
 import { useEffect, useState } from 'react';
+import Header from './components/Header';
 import { getCategories } from './api/categories';
+import './App.css';
 
 function App() {
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
 
-    useEffect(() => {
-        const loadCategories = async () => {
-            try {
-                const result = await getCategories();
+  useEffect(() => {
+      const fetchCategories = async () => {
+          try {
+              const data = await getCategories();
 
-                setCategories(result.data);
-            } catch (error) {
-                console.error(error);
+              setCategories(data);
+          } catch (error) {
+              console.error('Erreur lors du chargement des catégories:', error);
+          } finally {
+              setLoadingCategories(false);
+          }
+      };
 
-                setError('Impossible de charger les catégories.');
-            } finally {
-                setLoading(false);
-            }
-        };
+      fetchCategories();
+  }, []);
 
-        loadCategories();
-    }, []);
+  return (
+      <div className="app">
+          <Header />
 
-    if (loading) {
-        return <h1>Chargement...</h1>;
-    }
+          <main>
 
-    if (error) {
-        return <h1>{error}</h1>;
-    }
+              {/* HERO */}
+              <section className="hero">
+                  <div className="hero-content">
 
-    return (
-        <div>
-            <h1>Meilleure Pharma</h1>
+                      <span className="hero-badge">
+                          💊 Votre pharmacie en ligne
+                      </span>
 
-            <h2>Catégories</h2>
+                      <h1>
+                          Votre santé,
+                          <br />
+                          <span>notre priorité</span>
+                      </h1>
 
-            <ul>
-                {categories.map((category) => (
-                    <li key={category.id}>
-                        {category.name}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+                      <p>
+                          Retrouvez vos médicaments et produits de santé
+                          facilement, rapidement et en toute sécurité.
+                      </p>
+
+                      <div className="hero-buttons">
+                          <button className="btn-primary">
+                              Découvrir les médicaments
+                          </button>
+
+                          <button className="btn-secondary">
+                              Voir les catégories
+                          </button>
+                      </div>
+
+                  </div>
+              </section>
+
+              {/* CATEGORIES */}
+              <section className="categories">
+
+                  <h2>Nos catégories</h2>
+
+                  {loadingCategories ? (
+                      <p>Chargement des catégories...</p>
+                  ) : (
+                      <div className="category-grid">
+
+                          {categories.map((category) => (
+                              <div
+                                  className="category-card"
+                                  key={category.id}
+                              >
+                                  {category.name}
+                              </div>
+                          ))}
+
+                      </div>
+                  )}
+
+              </section>
+
+          </main>
+      </div>
+  );
 }
 
 export default App;
