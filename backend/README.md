@@ -1,8 +1,13 @@
-<!-- 
+<!--************  BACKEND **********
  1 cd bckend 
  2 php artisan serve  
  3 (http://127.0.0.1:8000)
+
+   ************ FRONTEND **********
+     1 cd FRONTEND  
+     2 npm run dev
  -->
+
 
 <!-- Filament admin (back-office)login  :
 .     'name' => 'karroumi',

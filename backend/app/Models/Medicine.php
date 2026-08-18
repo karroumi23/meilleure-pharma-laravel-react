@@ -23,7 +23,8 @@ class Medicine extends Model
 
         'image',
         'description',
-
+        
+        'purchase_price',
         'price',
         'sale_price',
 

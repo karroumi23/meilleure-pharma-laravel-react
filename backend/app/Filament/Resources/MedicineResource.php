@@ -85,17 +85,29 @@ class MedicineResource extends BaseResource
                             ->imageEditor(),
 
                     ]),
+                    
 
-                Forms\Components\Section::make('Prix')
-                    ->columns(2)
+                    Forms\Components\Section::make('Prix')
+                    ->columns(3)
                     ->schema([
 
-                        Forms\Components\TextInput::make('price')
+                        Forms\Components\TextInput::make('purchase_price')
+                            ->label("Prix d'achat")
                             ->numeric()
+                            ->prefix('DH')
+                            ->required(),
+
+                        Forms\Components\TextInput::make('price')
+                            ->label('Prix de vente')
+                            ->numeric()
+                            ->prefix('DH')
                             ->required(),
 
                         Forms\Components\TextInput::make('sale_price')
-                            ->numeric(),
+                            ->label('Prix promotionnel')
+                            ->numeric()
+                            ->prefix('DH')
+                            ->nullable(),
 
                     ]),
 
