@@ -111,16 +111,6 @@
     color: white;
 }
 
-.hero-visual {
-    position: relative;
-
-    width: 420px;
-    height: 380px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .hero-circle {
     width: 280px;

@@ -1,4 +1,5 @@
 import './Header.css';
+import logo from "../assets/meilleure-pharma-logo.png";
 
 function Header() {
     return (
@@ -9,7 +10,7 @@ function Header() {
 
                 {/* Logo */}
                 <a href="/" className="logo">
-                    Meilleure Pharma
+                    <img src={logo} alt="Meilleure Pharma" />
                 </a>
 
                 {/* Search */}

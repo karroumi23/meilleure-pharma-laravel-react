@@ -37,23 +37,7 @@ function Hero() {
 
                 </div>
 
-                <div className="hero-visual">
-
-                    <div className="hero-circle">
-                        💊
-                    </div>
-
-                    <div className="hero-card hero-card-one">
-                        <span>✓</span>
-                        Livraison rapide
-                    </div>
-
-                    <div className="hero-card hero-card-two">
-                        <span>✓</span>
-                        Produits certifiés
-                    </div>
-
-                </div>
+                
 
             </div>
 
